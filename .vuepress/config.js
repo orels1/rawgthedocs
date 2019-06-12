@@ -1,4 +1,5 @@
 module.exports = {
+  title: 'RAWG the Docs',
   description: 'Community-powered documentation for rawg.io',
   themeConfig: {
     nav: [

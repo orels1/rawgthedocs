@@ -11,5 +11,3 @@ features:
     details: Every request can be live tested right on the docs page
 footer: MIT Licensed | Copyright © 2019-present @orels1
 ---
-
-<Helmet title="RAWG the Docs" />

@@ -1,5 +1,5 @@
 module.exports = {
-  description: 'Community-powered documentation for rawg.io'
+  description: 'Community-powered documentation for rawg.io',
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },

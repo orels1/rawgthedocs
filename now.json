@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "name": "rawgthedocs",
+  "alias": "rawgthedocs.orels.sh",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": {
+        "distDir": ".vuepress/dist"
+      }
+    }
+  ]
+}

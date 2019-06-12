@@ -12,6 +12,7 @@ module.exports = {
     repo: 'orels1/rawgthedocs',
     repoLabel: 'Contribute!',
     docsRepo: 'orels1/rawgthedocs',
+    docsDir: 'docs',
     docsBranch: 'master',
     editLinks: true,
     editLinkText: 'Found an issue? Edit this page!'

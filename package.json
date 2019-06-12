@@ -5,8 +5,8 @@
   "author": "orels1",
   "license": "MIT",
   "scripts": {
-    "dev": "vuepress dev",
-    "build": "vuepress build",
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs",
     "now-build": "yarn build"
   },
   "dependencies": {

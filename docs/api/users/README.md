@@ -96,3 +96,14 @@ path="/users/current/games/:id"
   { label: 'status', value: '', placeholder: 'Status to assign' }
 ]"
 />
+
+#### Status options
+
+Statuses enum can have the following values
+
+- `playing`
+- `toplay`
+- `beated`
+- `dropped`
+- `yet`
+- `owned`

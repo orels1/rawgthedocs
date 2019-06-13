@@ -1,0 +1,189 @@
+$bgDark = #201f21;
+$sidebar = #262427;
+$contentBg = #2f2d31;
+$selectionBg = #38363a;
+$consoleBg = #403d41;
+$textDim = #8a898a;
+$textBright = #dad4ca;
+
+$red = #df6185;
+$green = #b8da7b;
+$yellow = #f4d76e;
+$orange = #e49769;
+$purple = #a59bef;
+$blue = #9cdae7;
+
+html, body {
+  background-color: $contentBg;
+}
+
+.navbar {
+  background-color: $bgDark;
+  border: none;
+
+  .site-name {
+    color: $red !important;
+  }
+
+  .links {
+    background: $bgDark !important;
+  }
+
+  .search-box {
+    input {
+      background: $contentBg;
+      border: none;
+      color: $textDim;
+    }
+
+    .suggestions {
+      background: $selectionBg;
+      border: none;
+    }
+
+    .suggestion {
+      &:hover {
+        background-color: $consoleBg;
+
+        a {
+          color: $blue;
+        }
+      }
+
+      a {
+        color: $textDim;
+
+        &:hover {
+          color: $blue;
+        }
+
+        &.active {
+          color: $blue;
+        }
+      }
+    }
+  }
+
+  .nav-item {
+    color: $textDim;
+
+    .nav-link:hover {
+      border-color: $blue !important;
+      color: $blue;
+    }
+
+    .router-link-active {
+      color: $textDim;
+      border-color: $blue !important;
+    }
+  }
+
+  .repo-link {
+    color: $textDim;
+
+    &:hover {
+      color: $blue;
+    }
+  }
+}
+
+.sidebar {
+  background-color: $sidebar;
+  border: none;
+}
+
+.site-name {
+  color: $red;
+}
+
+a {
+  color: $blue;
+
+  &.sidebar-link {
+
+    &:hover {
+      color: $textBright !important;
+    }
+
+    &.active {
+      color: $blue !important;
+      border-left-color: $blue !important;
+    }
+
+    color: $textDim !important;
+  }
+}
+
+h1 {
+  color: $yellow !important;
+}
+
+h2 {
+  color: $orange !important;
+  border-color: $consoleBg;
+}
+
+h3 {
+  color: $textBright !important;
+}
+
+h4 {
+  color: $textBright !important;
+}
+
+.page {
+  p {
+    color: $textBright;
+  }
+
+  ul {
+    li {
+      color: $textBright;
+    }
+  }
+
+  code {
+    background: $consoleBg;
+    color: $textDim;
+  }
+
+  .page-edit {
+    .edit-link {
+      a {
+        color: $blue;
+      }
+    }
+
+    .last-updated {
+      .prefix, .time {
+        color: $textDim;
+      }
+    }
+  }
+}
+
+.hero {
+  p.description {
+    color: $textBright !important;
+  }
+
+  .action-button {
+    background-color: $blue !important;
+    color: $bgDark !important;
+  }
+}
+
+.features {
+  border-color: $consoleBg !important;
+
+  .feature {
+    p {
+      color: $textDim !important;
+    }
+  }
+}
+
+.footer {
+  border-color: $consoleBg !important;
+  color: $textDim !important;
+}

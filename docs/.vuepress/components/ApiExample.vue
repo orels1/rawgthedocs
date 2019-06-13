@@ -130,7 +130,7 @@ export default {
     },
     statusStyle() {
       return {
-        backgroundColor: this.status === 200 ? '#3eaf7c' : '#d32f2f',
+        backgroundColor: this.status === 200 ? '#b8da7b' : '#df6185',
       };
     }
   },
@@ -214,6 +214,18 @@ export default {
 .example {
   margin-top: 10px;
   width: 100%;
+
+  --red: #df6185;
+  --green: #b8da7b;
+  --yellow: #f4d76e;
+  --orange: #e49769;
+  --purple: #a59bef;
+  --blue: #9cdae7;
+  --blueDark: #8ec6d1;
+
+  --bgDark: #201f21;
+  --consoleBg: #403d41;
+  --textBright: #dad4ca;
 }
 
 .bar {
@@ -223,8 +235,8 @@ export default {
 .show {
   border: none;
   padding: 15px 20px;
-  background-color: #3eaf7c;
-  color: white;
+  background-color: var(--blue);
+  color: var(--bgDark);
   border-radius: 5px;
   font-size: 14px;
   cursor: pointer;
@@ -239,9 +251,10 @@ export default {
   border-radius: 5px;
   font-size: 14px;
   box-sizing: border-box;
-  border: 2px solid #999999;
+  border: 2px solid var(--consoleBg);
   margin: 0 10px;
-  background-color: white;
+  background-color: var(--consoleBg);
+  color: var(--textBright);
   position: relative;
   z-index: 3;
   transition: border-color 300ms ease;
@@ -250,11 +263,11 @@ export default {
 }
 
 .url.copied {
-  border-color: #3eaf7c;
+  border-color: var(--green);
 }
 
 .show:hover {
-  background-color: #4abf8a;
+  background-color: var(--blueDark);
 }
 
 .params {
@@ -286,7 +299,9 @@ export default {
   outline: none !important;
   border-radius: 4px;
   padding: 7px 7px;
-  border: 2px solid #bdbdbd;
+  background-color: var(--consoleBg);
+  color: var(--textBright);
+  border: none;
   font-size: 14px;
 }
 
@@ -308,7 +323,7 @@ export default {
 .check::before {
   content: "";
   display: block;
-  border: 2px solid #999999;
+  border: 2px solid var(--consoleBg);
   width: 18px;
   height: 18px;
   margin-right: 10px;
@@ -318,15 +333,15 @@ export default {
 }
 
 .check:hover::before {
-  background-color: #3eaf7c;
+  background-color: var(--green);
   opacity: 0.6;
-  border-color: #3eaf7c;
+  border-color: var(--green);
 }
 
 .check.checked::before {
-  background-color: #3eaf7c;
+  background-color: var(--green);
   opacity: 1;
-  border-color: #3eaf7c;
+  border-color: var(--green);
 }
 
 .result {
@@ -346,7 +361,7 @@ export default {
   border-top-right-radius: 6px;
   margin-bottom: -6px;
   box-sizing: border-box;
-  color: white;
+  color: var(--bgDark);
   font-weight: bold;
 }
 

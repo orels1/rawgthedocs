@@ -63,7 +63,7 @@
           <code>{{param}}</code>
         </div>
         <input
-          type="text"
+          :type="param === 'password' ? 'password' : 'text'"
           :name="param"
           class="paramInput"
           v-model="bodyParams[param].value"
@@ -197,6 +197,10 @@ export default {
         ...json,
         results: json.results ? json.results.slice(0, 1) : undefined
       };
+
+      if (trimmed.key) {
+        trimmed.key = 'removed-for-security-reasons'
+      }
 
       this.visible = true;
       this.result = JSON.stringify(trimmed, null, 2);

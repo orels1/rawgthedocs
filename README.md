@@ -22,7 +22,7 @@ All contributions are welcome! No matter how big or small.
 The policy for the docs structure is as follows
 
 - The docs are located in the `docs` folder
-- All of the actual documentation routes are defined inside the `/api` filder
+- All of the actual documentation routes are defined inside the `/api` folder
 - Each folder represents one root api path (like `/users`, `/games`, etc)
 - Each folder should have a single `README.md` file in it
 - Each file should have all the sub paths for that root path in it

@@ -1,5 +1,11 @@
 # /users
 
+::: tip
+You can supply `current` in place of user slug to get data for the currently authorized user
+
+Requires authorization, duh
+:::
+
 ## GET /:user
 
 > User's profile

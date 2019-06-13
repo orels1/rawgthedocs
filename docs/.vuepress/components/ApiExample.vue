@@ -1,5 +1,6 @@
 <template>
   <div class="example">
+    <Login v-if="unauthorized" @authorized="authorized" @hide="hideLogin" />
     <div class="bar">
       <button class="show" @click="loadData">Fetch</button>
       <input
@@ -70,16 +71,18 @@ const PAGINATION_PARAMS = [
 ];
 
 const DEFAULT_PATH_PARAMS = {
-  'user': { default: 'orels1', placeholder: 'User slug to request the data for' }
+  'user': { default: 'orels1', placeholder: 'User slug to request the data for' },
+  'id': { default: 3498, placeholder: 'ID to request the data for' },
 }
 
 export default {
   props: {
     path: String,
     method: { type: String, default: 'GET' },
+    body: { type: Object, default: () => ({}) },
     headers: { type: Object },
     pagination: { type: Boolean, default: false },
-    query: { type: Array, default: () => ([]) }
+    query: { type: Array, default: () => ([]) },
   },
   data: () => ({
     result: '',
@@ -91,7 +94,9 @@ export default {
     version: 3,
     base: 'https://rawg.io/api',
     queryParams: {},
-    pathParams: {}
+    pathParams: {},
+    unauthorized: false,
+    token: '',
   }),
   computed: {
     mappedQueryParams() {
@@ -124,7 +129,8 @@ export default {
     },
     requestHeaders() {
       return ({
-        'User-Agent': 'docs.rawg.io',
+        'User-Agent': 'rawgthedocs.orels.sh',
+        'token': this.token ? `Token ${this.token}` : '',
         ...this.headers,
       });
     },
@@ -136,10 +142,18 @@ export default {
   },
   methods: {
     async loadData() {
+      this.saveToken();
+      const hasBody = !!Object.keys(this.body).length;
       const resp = await fetch(this.requestUrl, {
         method: this.method,
-        headers: this.requestHeaders
+        headers: this.requestHeaders,
+        body: hasBody ? JSON.stringify(this.body) : undefined
       });
+      if (resp.status === 401) {
+        this.unauthorized = true;
+        return;
+      }
+
       const json = await resp.json();
       this.status = resp.status;
       const trimmed = {
@@ -180,7 +194,6 @@ export default {
         });
       }
       if (this.query.length) {
-        console.log(this.query);
         this.query.forEach(param => {
           Vue.set(this.queryParams, param.label, {
             value: param.value,
@@ -201,16 +214,27 @@ export default {
           });
         }
       })
+    },
+    saveToken() {
+      this.token = window.localStorage.getItem('rawgToken');
+    },
+    authorized() {
+      this.unauthorized = false;
+      this.token = window.localStorage.getItem('rawgToken');
+    },
+    hideLogin() {
+      this.unauthorized = false
     }
   },
   async mounted() {
+    this.saveToken();
     this.generateQueryParams();
     this.generatePathParams();
   }
 }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
 .example {
   margin-top: 10px;
   width: 100%;
@@ -373,6 +397,11 @@ export default {
   box-sizing: border-box;
   max-height: 800px;
   overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+      width: 0px;  /* Remove scrollbar space */
+      background: transparent;  /* Optional: just make scrollbar invisible */
+  }
 }
 </style>
 

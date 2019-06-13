@@ -32,5 +32,11 @@ module.exports = {
         href: '/override.css'
       }
     ]
+  ],
+  plugins: [
+    ['container', {
+      type: 'info',
+      defaultTitle: '',
+    }]
   ]
 };

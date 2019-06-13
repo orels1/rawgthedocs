@@ -15,7 +15,8 @@ module.exports = {
     docsDir: 'docs',
     docsBranch: 'master',
     editLinks: true,
-    editLinkText: 'Found an issue? Edit this page!'
+    editLinkText: 'Found an issue? Edit this page!',
+    displayAllHeaders: true
   },
   head: [
     [

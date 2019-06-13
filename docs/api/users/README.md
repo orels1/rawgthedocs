@@ -76,3 +76,23 @@ Returns revoews posted by the specified user
  ]"
  pagination
 />
+
+## PATCH /current/games/:id
+
+> Game status update
+
+### Description
+
+Update a game by ID for currently authorized user
+
+::: tip
+This is an authorized route. A `token` header is required
+:::
+
+<ApiExample
+method="PATCH"
+path="/users/current/games/:id"
+:body="[
+  { label: 'status', value: '', placeholder: 'Status to assign' }
+]"
+/>

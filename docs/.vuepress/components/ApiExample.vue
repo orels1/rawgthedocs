@@ -52,6 +52,25 @@
         >
       </div>
     </div>
+    <div class="params" v-if="mappedBodyParams.length">
+      <h3>Body</h3>
+      <div class="param" v-for="param in mappedBodyParams" :key="param">
+        <div class="paramLabel">
+          <div
+            :class="['check', bodyParams[param].enabled && 'checked']"
+            @click="bodyParams[param].enabled = !bodyParams[param].enabled"
+          />
+          <code>{{param}}</code>
+        </div>
+        <input
+          type="text"
+          :name="param"
+          class="paramInput"
+          v-model="bodyParams[param].value"
+          :placeholder="bodyParams[param].placeholder"
+        >
+      </div>
+    </div>
     <div v-if="result.length && visible" class="result">
       <div class="status" :style="statusStyle">{{status}} {{method}}</div>
       <pre v-highlightjs="result" class="code">
@@ -79,7 +98,7 @@ export default {
   props: {
     path: String,
     method: { type: String, default: 'GET' },
-    body: { type: Object, default: () => ({}) },
+    body: { type: Array, default: () => ([]) },
     headers: { type: Object },
     pagination: { type: Boolean, default: false },
     query: { type: Array, default: () => ([]) },
@@ -97,6 +116,7 @@ export default {
     pathParams: {},
     unauthorized: false,
     token: '',
+    bodyParams: {}
   }),
   computed: {
     mappedQueryParams() {
@@ -127,12 +147,29 @@ export default {
     requestUrl() {
       return `${this.base}${this.processedPath}${this.queryString}`;
     },
+    mappedBodyParams() {
+      return Object.entries(this.bodyParams).map(p => p[0]);
+    },
     requestHeaders() {
       return ({
         'User-Agent': 'rawgthedocs.orels.sh',
+        'Content-Type': 'application/json',
         'token': this.token ? `Token ${this.token}` : '',
         ...this.headers,
       });
+    },
+    requestBody() {
+      if (!this.body.length) {
+        return;
+      }
+
+      const body = {};
+      Object.entries(this.bodyParams).forEach(([param, data]) => {
+        if (data.enabled) {
+          body[param] = data.value;
+        }
+      });
+      return JSON.stringify(body);
     },
     statusStyle() {
       return {
@@ -147,7 +184,7 @@ export default {
       const resp = await fetch(this.requestUrl, {
         method: this.method,
         headers: this.requestHeaders,
-        body: hasBody ? JSON.stringify(this.body) : undefined
+        body: this.requestBody,
       });
       if (resp.status === 401) {
         this.unauthorized = true;
@@ -215,6 +252,17 @@ export default {
         }
       })
     },
+    generateBodyParams() {
+      if (this.body.length) {
+        this.body.forEach(param => {
+          Vue.set(this.bodyParams, param.label, {
+            value: param.value,
+            placeholder: param.placeholder,
+            enabled: param.enabled
+          })
+        });
+      }
+    },
     saveToken() {
       this.token = window.localStorage.getItem('rawgToken');
     },
@@ -230,6 +278,7 @@ export default {
     this.saveToken();
     this.generateQueryParams();
     this.generatePathParams();
+    this.generateBodyParams();
   }
 }
 </script>

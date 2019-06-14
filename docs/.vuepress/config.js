@@ -19,6 +19,7 @@ module.exports = {
     displayAllHeaders: true
   },
   head: [
+    ['link', { rel: 'icon', href: '/icon.png' }],
     [
       'link',
       {

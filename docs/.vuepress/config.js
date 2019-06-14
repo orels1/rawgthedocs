@@ -7,7 +7,7 @@ module.exports = {
       { text: 'Docs', link: '/api/' },
       { text: 'rawg.io', link: 'https://rawg.io' }
     ],
-    sidebar: ['/api/', '/api/users/', '/api/auth/'],
+    sidebar: ['/api/', '/api/users/', '/api/auth/', '/api/games/'],
     lastUpdated: 'Last Updated',
     repo: 'orels1/rawgthedocs',
     repoLabel: 'Contribute!',

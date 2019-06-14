@@ -132,6 +132,7 @@ export default {
 
 <style scoped lang="stylus">
 @import '../styles/pallete.styl'
+
 .wrapper
   width 100vw
   height 100vh

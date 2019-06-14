@@ -1,5 +1,7 @@
 # /users
 
+> User data related routes
+
 ::: tip
 You can supply `current` in place of user slug to get data for the currently authorized user
 
@@ -77,7 +79,7 @@ Returns revoews posted by the specified user
  pagination
 />
 
-## PATCH /current/games/:id
+## PATCH /current/games/:gameId
 
 > Game status update
 
@@ -91,7 +93,7 @@ This is an authorized route. A `token` header is required
 
 <ApiExample
 method="PATCH"
-path="/users/current/games/:id"
+path="/users/current/games/:gameId"
 :body="[
   { label: 'status', value: '', placeholder: 'Status to assign' }
 ]"

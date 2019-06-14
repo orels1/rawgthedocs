@@ -1,5 +1,7 @@
 # /auth
 
+> Authentication / authorization related routes
+
 ## POST /login
 
 > Login

@@ -2,7 +2,7 @@
   <div class="example">
     <Login v-if="unauthorized" @authorized="authorized" @hide="hideLogin" />
     <div class="bar">
-      <button class="show" @click="loadData">Fetch</button>
+      <button class="show fetch" @click="loadData" :disabled="!loaded">Fetch</button>
       <input
         title="click to copy"
         type="text"
@@ -30,6 +30,7 @@
           class="paramInput"
           v-model="pathParams[param].value"
           :placeholder="pathParams[param].placeholder"
+          @keydown.enter="loadData"
         >
       </div>
     </div>
@@ -49,6 +50,7 @@
           class="paramInput"
           v-model="queryParams[param].value"
           :placeholder="queryParams[param].placeholder"
+          @keydown.enter="loadData"
         >
       </div>
     </div>
@@ -68,6 +70,7 @@
           class="paramInput"
           v-model="bodyParams[param].value"
           :placeholder="bodyParams[param].placeholder"
+          @keydown.enter="loadData"
         >
       </div>
     </div>
@@ -90,8 +93,9 @@ const PAGINATION_PARAMS = [
 ];
 
 const DEFAULT_PATH_PARAMS = {
-  'user': { default: 'orels1', placeholder: 'User slug to request the data for' },
-  'id': { default: 3498, placeholder: 'ID to request the data for' },
+  user: { default: 'orels1', placeholder: 'User slug to request the data for' },
+  gameId: { default: 4200, placeholder: 'Game ID to request the data for' },
+  gameSlug: { default: 'portal-2', placeholder: 'Game slug to request the data for' }
 }
 
 export default {
@@ -104,6 +108,7 @@ export default {
     query: { type: Array, default: () => ([]) },
   },
   data: () => ({
+    loaded: true,
     result: '',
     unapproved: false,
     hidden: false,
@@ -179,7 +184,10 @@ export default {
   },
   methods: {
     async loadData() {
-      this.saveToken();
+      this.loaded = false;
+      if (!this.token) {
+        this.saveToken();
+      }
       const hasBody = !!Object.keys(this.body).length;
       const resp = await fetch(this.requestUrl, {
         method: this.method,
@@ -188,6 +196,7 @@ export default {
       });
       if (resp.status === 401) {
         this.unauthorized = true;
+        this.loaded = true;
         return;
       }
 
@@ -204,6 +213,7 @@ export default {
 
       this.visible = true;
       this.result = JSON.stringify(trimmed, null, 2);
+      this.loaded = true;
     },
     toggleVisibility() {
       this.visible = !this.visible;
@@ -225,15 +235,6 @@ export default {
       this.version = v;
     },
     generateQueryParams() {
-      if (this.pagination) {
-        PAGINATION_PARAMS.forEach(param => {
-          Vue.set(this.queryParams, param.label, {
-            value: param.value,
-            placeholder: param.placeholder,
-            enabled: param.enabled
-          });
-        });
-      }
       if (this.query.length) {
         this.query.forEach(param => {
           Vue.set(this.queryParams, param.label, {
@@ -241,6 +242,16 @@ export default {
             placeholder: param.placeholder,
             enabled: false
           })
+        });
+      }
+
+      if (this.pagination) {
+        PAGINATION_PARAMS.forEach(param => {
+          Vue.set(this.queryParams, param.label, {
+            value: param.value,
+            placeholder: param.placeholder,
+            enabled: param.enabled
+          });
         });
       }
     },
@@ -288,21 +299,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '../styles/pallete.styl'
+
 .example {
   margin-top: 10px;
   width: 100%;
-
-  --red: #df6185;
-  --green: #b8da7b;
-  --yellow: #f4d76e;
-  --orange: #e49769;
-  --purple: #a59bef;
-  --blue: #9cdae7;
-  --blueDark: #8ec6d1;
-
-  --bgDark: #201f21;
-  --consoleBg: #403d41;
-  --textBright: #dad4ca;
 }
 
 .bar {
@@ -312,14 +313,19 @@ export default {
 .show {
   border: none;
   padding: 15px 20px;
-  background-color: var(--blue);
-  color: var(--bgDark);
+  background-color: $blue;
+  color: $bgDark;
   border-radius: 5px;
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.1s ease;
   outline: none;
   flex: 1;
+
+  &.fetch:disabled {
+    background-color: $textDim;
+    color: $textBright;
+  }
 }
 
 .url {
@@ -328,10 +334,10 @@ export default {
   border-radius: 5px;
   font-size: 14px;
   box-sizing: border-box;
-  border: 2px solid var(--consoleBg);
+  border: 2px solid $consoleBg;
   margin: 0 10px;
-  background-color: var(--consoleBg);
-  color: var(--textBright);
+  background-color: $consoleBg;
+  color: $textBright;
   position: relative;
   z-index: 3;
   transition: border-color 300ms ease;
@@ -340,11 +346,11 @@ export default {
 }
 
 .url.copied {
-  border-color: var(--green);
+  border-color: $green;
 }
 
 .show:hover {
-  background-color: var(--blueDark);
+  background-color: $blueDark;
 }
 
 .params {
@@ -376,8 +382,8 @@ export default {
   outline: none !important;
   border-radius: 4px;
   padding: 7px 7px;
-  background-color: var(--consoleBg);
-  color: var(--textBright);
+  background-color: $consoleBg;
+  color: $textBright;
   border: none;
   font-size: 14px;
 }
@@ -400,7 +406,7 @@ export default {
 .check::before {
   content: "";
   display: block;
-  border: 2px solid var(--consoleBg);
+  border: 2px solid $consoleBg;
   width: 18px;
   height: 18px;
   margin-right: 10px;
@@ -410,15 +416,15 @@ export default {
 }
 
 .check:hover::before {
-  background-color: var(--green);
+  background-color: $green;
   opacity: 0.6;
-  border-color: var(--green);
+  border-color: $green;
 }
 
 .check.checked::before {
-  background-color: var(--green);
+  background-color: $green;
   opacity: 1;
-  border-color: var(--green);
+  border-color: $green;
 }
 
 .result {
@@ -438,7 +444,7 @@ export default {
   border-top-right-radius: 6px;
   margin-bottom: -6px;
   box-sizing: border-box;
-  color: var(--bgDark);
+  color: $bgDark;
   font-weight: bold;
 }
 

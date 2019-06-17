@@ -13,16 +13,16 @@ Returns new collections
 <ApiExample path="/collections" pagination/>
 
 
-## GET /:collection
+## GET /:collectionSlug
 
 > Collection data
 
 ### Description
 
 Returns the collection data, without games
-<ApiExample path="/collections/:collection"  />
+<ApiExample path="/collections/:collectionSlug"  />
 
-## GET /:collection/feed
+## GET /:collectionSlug/feed
 
 > Collection games
 
@@ -30,12 +30,13 @@ Returns the collection data, without games
 
 Returns the games in a collection
 
-<ApiExample path="/collections/:collection/feed" pagination/>
+<ApiExample path="/collections/:collectionSlug/feed" pagination/>
 
 
-## POST /:collection/games
+## POST /:collectionSlug/games
 
 > Add games to the collection
+
 ### Description
 
 ::: tip
@@ -46,9 +47,9 @@ Adds multiple games to the collection
 
 <ApiExample
 method="POST"
-path="/collections/:collection/games"
+path="/collections/:collectionSlug/games"
 :body="[
-  { label: 'games': value: [1234, 12345], placeholder: 'Array of game IDs' }
+  { label: 'games': value: [4200, 13537], placeholder: 'Array of game IDs' }
 ]"
 />
 
@@ -64,7 +65,9 @@ Returns popular collections
 
 ## GET /lists/main
 
-> As fas as i could tell, same as popular
+::: tip
+Same as the [GET /lists/popular](#get-lists-popular) at the time of this docs being written
+:::
 
 ### Descritption
 
@@ -79,7 +82,7 @@ Returns popular collections
 ### Description
 
 Update a collection by ID for currently authorized user.
-Returns the updated collection data (like /:collection)
+Returns the updated collection data (like [/:collectionSlug](#get-collectionSlug))
 
 ::: tip
 This is an authorized route. A `token` header is required

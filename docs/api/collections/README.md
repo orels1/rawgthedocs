@@ -1,12 +1,12 @@
 # /collections
 
-> collection related routes, new collections
+> Collection related routes, new collections
 
 ## GET /
 
 > New collections
 
-### Descritption
+### Description
 
 Returns new collections
 
@@ -32,7 +32,6 @@ Returns the games in a collection
 
 <ApiExample path="/collections/:collectionSlug/feed" pagination/>
 
-
 ## POST /:collectionSlug/games
 
 > Add games to the collection
@@ -49,7 +48,7 @@ Adds multiple games to the collection
 method="POST"
 path="/collections/:collectionSlug/games"
 :body="[
-  { label: 'games': value: [4200, 13537], placeholder: 'Array of game IDs' }
+  { label: 'games', value: [4200, 13537], placeholder: 'Array of game IDs' }
 ]"
 />
 
@@ -57,7 +56,7 @@ path="/collections/:collectionSlug/games"
 
 > Popular collections
 
-### Descritption
+### Description
 
 Returns popular collections
 
@@ -66,10 +65,10 @@ Returns popular collections
 ## GET /lists/main
 
 ::: tip
-Same as the [GET /lists/popular](#get-lists-popular) at the time of this docs being written
+Same as the [GET /lists/popular](#get-lists-popular) at the time of these docs being written
 :::
 
-### Descritption
+### Description
 
 Returns popular collections
 
@@ -90,7 +89,7 @@ This is an authorized route. A `token` header is required
 
 <ApiExample
 method="PATCH"
-path="/colections/:collectionId"
+path="/collections/:collectionId"
 :body="[
   { label: 'name', value: '', placeholder: 'New name' },
   { label: 'description', value: '', placeholder: 'New description' }

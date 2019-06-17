@@ -95,7 +95,8 @@ const PAGINATION_PARAMS = [
 const DEFAULT_PATH_PARAMS = {
   user: { default: 'orels1', placeholder: 'User slug to request the data for' },
   gameId: { default: 4200, placeholder: 'Game ID to request the data for' },
-  gameSlug: { default: 'portal-2', placeholder: 'Game slug to request the data for' }
+  gameSlug: { default: 'portal-2', placeholder: 'Game slug to request the data for' },
+  collectionSlug: { default: 'must-play', placeholder: 'Collection slug to request the data for' }
 }
 
 export default {
@@ -171,7 +172,7 @@ export default {
       const body = {};
       Object.entries(this.bodyParams).forEach(([param, data]) => {
         if (data.enabled) {
-          body[param] = data.value;
+          body[param] = JSON.parse(data.value);
         }
       });
       return JSON.stringify(body);
@@ -270,8 +271,14 @@ export default {
     generateBodyParams() {
       if (this.body.length) {
         this.body.forEach(param => {
+          let parsedValue = '';
+          if (typeof param.value === 'string' || typeof param.value === 'number') {
+            parsedValue = param.value;
+          } else {
+            parsedValue = JSON.stringify(param.value);
+          }
           Vue.set(this.bodyParams, param.label, {
-            value: param.value,
+            value: parsedValue,
             placeholder: param.placeholder,
             enabled: param.enabled
           })

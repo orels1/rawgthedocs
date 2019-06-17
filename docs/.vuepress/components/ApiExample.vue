@@ -202,6 +202,14 @@ export default {
         return;
       }
 
+      if (resp.status === 404) {
+        this.status = 404;
+        this.result = 'Not Found'
+        this.visible = true;
+        this.loaded = true;
+        return;
+      }
+
       const json = await resp.json();
       this.status = resp.status;
       const trimmed = {

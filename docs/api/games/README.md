@@ -41,3 +41,13 @@ Returns a single game for the specified slug
 Returns suggested games for the base `gameSlug`, uses rawg's ai discovery system 🚀
 
 <ApiExample path="/games/:gameSlug/suggested" pagination />
+
+## GET /:gameSlug/collections
+
+> collections with this game
+
+### Description
+
+Returns a page of collections this game is a part of
+
+<ApiExample path="/games/:gameSlug/collections" pagination />

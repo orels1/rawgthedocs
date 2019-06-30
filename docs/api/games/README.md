@@ -80,7 +80,7 @@ path="/games/:gameSlug"
 />
 ## GET /:gameSlug/screenshots
 
-> screenshots of this game
+> Game screenshots
 
 ### Description
 

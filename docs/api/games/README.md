@@ -78,3 +78,16 @@ path="/games/:gameSlug"
   { label: 'metacritic_url', value: '', placeholder: 'The url to metacritic, where the metacritic value is taken from' },
 ]"
 />
+## GET /:gameSlug/screenshots
+
+> screenshots of this game
+
+### Description
+
+Returns a page of screenshots of this game
+
+<ApiExample path="/games/:gameSlug/screenshots" 
+  :query="[
+    { label: 'with_deleted', value: '', placeholder: 'true/false, whether to include deleted screenshots' }
+  ]"
+  pagination />

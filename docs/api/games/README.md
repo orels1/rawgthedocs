@@ -44,7 +44,7 @@ Returns suggested games for the base `gameSlug`, uses rawg's ai discovery system
 
 ## GET /:gameSlug/collections
 
-> collections with this game
+> Collections with this game
 
 ### Description
 

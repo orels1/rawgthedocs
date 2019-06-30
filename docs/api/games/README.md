@@ -66,7 +66,7 @@ path="/games/:gameSlug"
 :body="[
   { label: 'name', value: '', placeholder: 'The current game name' },
   { label: 'description', value: '', placeholder: 'The current or new description' },
-  { label: 'alternative_names', value: '', placeholder: 'List of names, ["name1", "name2"]' },
+  { label: 'alternative_names', value: '', placeholder: 'List of names, [\"name1\", \"name2\"]' },
   { label: 'platforms', value: '', placeholder: 'List of platform ids, [4, 5]' },
   { label: 'genres', value: '', placeholder: 'List of genres' },
   { label: 'publishers', value: '', placeholder: 'List of publishers' },

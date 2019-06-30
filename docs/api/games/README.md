@@ -54,7 +54,7 @@ Returns a page of collections this game is a part of
 
 ## PATCH /:gameSlug
 
-> edits the games data
+> Edit the game data
 
 ### Description
 

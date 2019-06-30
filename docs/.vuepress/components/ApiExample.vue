@@ -387,14 +387,14 @@ export default {
 }
 
 .paramLabel {
-  flex: 1;
+  flex: 2;
   font-weight: bold;
   display: flex;
   min-width: 150px;
 }
 
 .paramInput {
-  flex: 5;
+  flex: 6;
   outline: none !important;
   border-radius: 4px;
   padding: 7px 7px;

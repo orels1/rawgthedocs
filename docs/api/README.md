@@ -66,7 +66,7 @@ I haven't seen the token expire so far, but I'm certain it can be invalidated by
 
 It's always nice to have an API client library to do the boring stuff for you, so here are the currently known libraries that wrap the RAWG.io API
 
-- [rawgpy](https://pypi.org/project/rawgpy/) - a Python wrapper by `laundmo`
+- [rawgpy](https://pypi.org/project/rawgpy/) - a Python wrapper by [laundmo](https://github.com/laundmo)
 - [rawger](https://npmjs.org/package/rawger) - a JS wrapper by [orels1](https://github.com/orels1) (creator of these docs)
 
 If you are developing a library, please create an issue [in the docs repo](https://github.com/orels1/rawgthedocs) with a link to it. I will gladly add it!

@@ -1,5 +1,11 @@
 # Getting Started
 
+::: warning
+This documentation is now deprecated in favor of the [official docs](https://api.rawg.io/docs/).
+
+While this one still looks better, imo, it can't compete in terms of completeness and i don't see a reason to just clone it over here. It was fun, but it's time to move on. This will stay online for preservation purposes.
+:::
+
 ## About RAWG api
 
 First and foremost - please take a look at the [official RAWG.io api page](https://rawg.io/apidocs). There are some rules you have to follow. Some of the rules are listed below.

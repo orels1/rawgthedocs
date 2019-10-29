@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_deploy:
+    name: build and deploy to now.sh
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: amondnet/now-deployment@v1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        zeit-token: ${{ secrets.ZEIT_TOKEN }}
+        now-args: '--prod'
+      

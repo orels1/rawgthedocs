@@ -96,7 +96,7 @@ const DEFAULT_PATH_PARAMS = {
   user: { default: 'orels1', placeholder: 'User slug to request the data for' },
   gameId: { default: 4200, placeholder: 'Game ID to request the data for' },
   gameSlug: { default: 'portal-2', placeholder: 'Game slug to request the data for' },
-  collectionSlug: { default: 'must-play', placeholder: 'Collections slug to request the data for' }
+  collectionSlug: { default: 'must-play', placeholder: 'Collection slug to request the data for' }
   collectionId: { default: 14, placeholder: 'Collection id to update' }
 }
 

@@ -95,7 +95,8 @@ This is an authorized route. A `token` header is required
 method="PATCH"
 path="/users/current/games/:gameId"
 :body="[
-  { label: 'status', value: '', placeholder: 'Status to assign' }
+  { label: 'status', value: '', placeholder: 'Status to assign' },
+  { label: 'games', value: [123, 123], placeholder: 'List of games to push' }
 ]"
 />
 

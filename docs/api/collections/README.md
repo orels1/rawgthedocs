@@ -12,6 +12,26 @@ Returns new collections
 
 <ApiExample path="/collections" pagination/>
 
+## POST /
+
+> Create a collection
+
+### Description
+
+::: tip
+This is an authorized route. A `token` header is required
+:::
+
+Creates a new collection
+
+<ApiExample
+method="POST"
+path="/collections/"
+:body="[
+  { label: 'name', value: 'Nice Games', placeholder: 'Name of the Collection' },
+  { label: 'description', value: 'My collection of nice games', placeholder: 'Description for the Collection' }
+]"
+/>
 
 ## GET /:collectionSlug
 

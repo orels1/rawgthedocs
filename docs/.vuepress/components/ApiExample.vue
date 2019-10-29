@@ -97,6 +97,7 @@ const DEFAULT_PATH_PARAMS = {
   gameId: { default: 4200, placeholder: 'Game ID to request the data for' },
   gameSlug: { default: 'portal-2', placeholder: 'Game slug to request the data for' },
   collectionSlug: { default: 'must-play', placeholder: 'Collections slug to request the data for' }
+  collectionId: { default: 14, placeholder: 'Collection id to update' }
 }
 
 export default {
@@ -201,6 +202,14 @@ export default {
         return;
       }
 
+      if (resp.status === 404) {
+        this.status = 404;
+        this.result = 'Not Found'
+        this.visible = true;
+        this.loaded = true;
+        return;
+      }
+
       const json = await resp.json();
       this.status = resp.status;
       const trimmed = {
@@ -271,8 +280,14 @@ export default {
     generateBodyParams() {
       if (this.body.length) {
         this.body.forEach(param => {
+          let parsedValue = '';
+          if (typeof param.value === 'string' || typeof param.value === 'number') {
+            parsedValue = param.value;
+          } else {
+            parsedValue = JSON.stringify(param.value);
+          }
           Vue.set(this.bodyParams, param.label, {
-            value: param.value,
+            value: parsedValue,
             placeholder: param.placeholder,
             enabled: param.enabled
           })
@@ -372,14 +387,14 @@ export default {
 }
 
 .paramLabel {
-  flex: 1;
+  flex: 2;
   font-weight: bold;
   display: flex;
   min-width: 150px;
 }
 
 .paramInput {
-  flex: 5;
+  flex: 6;
   outline: none !important;
   border-radius: 4px;
   padding: 7px 7px;
